@@ -11,9 +11,25 @@ import Room6 from "./room6.js";
 import Room8 from "./room8.js";
 import Room10 from "./room10.js";
 import Room12 from "./room12.js";
-import Room14 from "./room14.js";
 import Result from "./result.js"
 
+const pairs = [
+  [2, 5], 
+  [1, 0], 
+  [0, 2], 
+  [1, 3], 
+  [4, 5], 
+  [0, 3], 
+  [1, 4], 
+  [1, 2],
+  [0, 5], 
+  [4, 0], 
+  [1, 5], 
+  [3, 4],
+  [2, 3],
+  [4, 2], 
+  [3, 5]
+];
 
 class Online extends React.Component {
   constructor(props){
@@ -37,109 +53,45 @@ class Online extends React.Component {
         pet: ["ペット禁止", "ペット可能"],
         smoke: ["禁煙", "喫煙可"]
       }, 
-      profiles: [
-        // room4
+      profile_4: [
         [1, 1, 1, 0], 
         [0, 2, 0, 0], 
         [1, 3, 0, 1], 
         [0, 2, 2, 0], 
         [1, 2, 2, 1], 
-        [0, 1, 0, 0], 
-        [1, 2, 1, 1], 
-        [0, 1, 0, 1], 
-        [1, 3, 1, 0], 
-        [0, 2, 1, 1], 
-        [1, 0, 2, 0], 
-        [0, 2, 0, 1], 
-        [1, 2, 1, 0], 
-        [1, 0, 2, 1], 
-        [0, 2, 2, 1], 
-        [1, 2, 2, 0], 
-        // room6
+        [0, 1, 0, 0]
+      ], 
+      profile_6: [
         [0, 1, 1, 0, 1, 1], 
         [1, 2, 0, 0, 1, 2], 
         [0, 0, 2, 0, 1, 1], 
         [1, 0, 1, 1, 0, 0], 
         [0, 2, 0, 0, 1, 2], 
-        [1, 2, 1, 0, 2, 0], 
-        [1, 1, 0, 1, 1, 0], 
-        [0, 2, 1, 0, 2, 2],
-        [1, 3, 0, 1, 1, 2], 
-        [0, 0, 2, 1, 2, 0], 
-        [0, 1, 0, 1, 1, 2], 
-        [0, 1, 1, 0, 2, 0], 
-        [0, 3, 2, 0, 1, 1], 
-        [1, 0, 0, 1, 1, 2], 
-        [0, 0, 0, 1, 0, 1], 
-        [1, 3, 1, 1, 1, 2],
-        // room8
+        [1, 2, 1, 0, 2, 0],
+      ], 
+      profile_8: [
         [1, 0, 2, 1, 0, 1, 0, 2], 
         [0, 2, 2, 0, 1, 2, 1, 0], 
         [1, 3, 0, 1, 2, 0, 0, 1], 
         [0, 1, 0, 1, 0, 1, 1, 3], 
         [0, 2, 1, 1, 0, 1, 1, 1], 
-        [0, 3, 1, 0, 2, 2, 0, 3], 
-        [0, 3, 1, 0, 1, 2, 1, 1], 
-        [1, 2, 1, 1, 1, 0, 0, 2], 
-        [1, 3, 2, 1, 0, 1, 1, 3], 
-        [1, 3, 1, 1, 2, 2, 0, 1], 
-        [0, 1, 1, 1, 0, 2, 0, 1], 
-        [1, 2, 2, 1, 2, 1, 0, 2], 
-        [0, 1, 0, 1, 0, 2, 0, 2], 
-        [0, 1, 1, 0, 2, 1, 1, 0], 
-        [1, 0, 0, 1, 0, 2, 1, 1], 
-        [1, 1, 0, 1, 0, 0, 0, 1], 
-        // room10
+        [0, 3, 1, 0, 2, 2, 0, 3],
+      ], 
+      profile_10: [
         [1, 0, 1, 1, 1, 2, 0, 0, 1, 1], 
         [0, 2, 1, 0, 0, 2, 1, 0, 1, 0], 
         [1, 2, 0, 1, 2, 1, 1, 2, 1, 0], 
         [0, 3, 1, 0, 2, 1, 1, 2, 0, 1], 
         [0, 3, 0, 0, 2, 0, 1, 0, 1, 0], 
-        [1, 1, 0, 1, 2, 0, 0, 2, 1, 0], 
-        [1, 2, 1, 0, 1, 2, 0, 3, 1, 0], 
-        [1, 1, 1, 0, 0, 0, 0, 2, 0, 1], 
-        [1, 2, 0, 0, 2, 0, 0, 3, 0, 0], 
-        [0, 2, 2, 1, 2, 0, 0, 0, 1, 1], 
-        [1, 0, 2, 1, 0, 1, 1, 2, 1, 1], 
-        [0, 2, 0, 1, 2, 0, 1, 2, 0, 1], 
-        [0, 2, 2, 0, 1, 0, 1, 0, 1, 0], 
-        [1, 1, 2, 1, 1, 2, 1, 1, 0, 0], 
-        [0, 1, 2, 0, 2, 0, 1, 3, 0, 1], 
-        [1, 3, 1, 0, 0, 0, 0, 1, 0, 1], 
-        // room12
+        [1, 1, 0, 1, 2, 0, 0, 2, 1, 0]
+      ], 
+      profile_12: [
         [1, 1, 1, 0, 1, 1, 0, 3, 0, 0, 0, 0], 
         [0, 1, 1, 0, 2, 1, 1, 2, 1, 1, 1, 0], 
         [1, 2, 1, 0, 2, 1, 0, 1, 1, 0, 0, 1], 
         [0, 0, 2, 0, 2, 0, 0, 3, 0, 1, 2, 2], 
         [0, 0, 1, 0, 2, 1, 0, 3, 0, 0, 0, 0], 
-        [0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2], 
-        [0, 0, 1, 0, 2, 2, 1, 2, 0, 0, 1, 2], 
-        [1, 1, 2, 0, 1, 1, 0, 3, 0, 1, 2, 1], 
-        [0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 2, 2], 
-        [0, 2, 1, 1, 1, 0, 0, 2, 1, 1, 1, 0], 
-        [0, 2, 1, 0, 1, 2, 0, 3, 0, 0, 2, 0], 
-        [0, 1, 1, 0, 0, 2, 0, 1, 0, 0, 1, 2], 
-        [1, 2, 1, 0, 0, 0, 1, 1, 1, 1, 2, 0], 
-        [0, 3, 0, 0, 1, 1, 1, 0, 0, 1, 2, 1], 
-        [0, 0, 1, 1, 2, 2, 0, 1, 1, 0, 1, 0], 
-        [0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 2, 0], 
-        // room14
-        [0, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1], 
-        [0, 2, 1, 0, 2, 2, 1, 3, 1, 1, 2, 1, 0, 0], 
-        [1, 1, 0, 0, 1, 2, 0, 3, 1, 0, 2, 2, 1, 1], 
-        [1, 1, 1, 0, 0, 1, 0, 2, 0, 0, 2, 0, 0, 0], 
-        [1, 0, 1, 1, 1, 0, 0, 3, 1, 0, 2, 0, 0, 1], 
-        [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0], 
-        [0, 3, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0], 
-        [0, 1, 1, 0, 0, 1, 0, 3, 1, 1, 1, 1, 1, 1], 
-        [1, 1, 2, 1, 2, 2, 0, 0, 1, 1, 0, 0, 1, 0], 
-        [0, 3, 1, 1, 2, 1, 0, 1, 0, 1, 0, 2, 0, 0], 
-        [0, 0, 2, 1, 0, 1, 1, 3, 1, 1, 2, 1, 0, 0], 
-        [1, 3, 1, 1, 2, 1, 0, 2, 0, 0, 2, 0, 1, 0], 
-        [0, 3, 0, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 0], 
-        [1, 2, 2, 1, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0], 
-        [0, 0, 1, 1, 2, 0, 0, 3, 0, 0, 2, 2, 1, 1], 
-        [0, 2, 1, 1, 0, 2, 1, 0, 0, 1, 0, 1, 0, 0], 
+        [0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2]
       ]
     };
     this.addChoiceA = this.addChoiceA.bind(this);
@@ -159,16 +111,16 @@ class Online extends React.Component {
   }
 
   createTwoRooms(){
-    let energy1 = this.state.levels.energy[this.state.profiles[this.state.phase*2][0]];
-    let extent1 = this.state.levels.extent[this.state.profiles[this.state.phase*2][1]];
-    let distance1 = this.state.levels.distance[this.state.profiles[this.state.phase*2][2]];
-    let bathType1 = this.state.levels.bathType[this.state.profiles[this.state.phase*2][3]];
-    let energy2 = this.state.levels.energy[this.state.profiles[this.state.phase*2+1][0]];
-    let extent2 = this.state.levels.extent[this.state.profiles[this.state.phase*2+1][1]];
-    let distance2 = this.state.levels.distance[this.state.profiles[this.state.phase*2+1][2]];
-    let bathType2 = this.state.levels.bathType[this.state.profiles[this.state.phase*2+1][3]];
+    if(this.state.phase < 15){
+      let energy1 = this.state.levels.energy[this.state.profile_4[pairs[this.state.phase%15][0]][0]];
+      let extent1 = this.state.levels.extent[this.state.profile_4[pairs[this.state.phase%15][0]][1]];
+      let distance1 = this.state.levels.distance[this.state.profile_4[pairs[this.state.phase%15][0]][2]];
+      let bathType1 = this.state.levels.bathType[this.state.profile_4[pairs[this.state.phase%15][0]][3]];
+      let energy2 = this.state.levels.energy[this.state.profile_4[pairs[this.state.phase%15][1]][0]];
+      let extent2 = this.state.levels.extent[this.state.profile_4[pairs[this.state.phase%15][1]][1]];
+      let distance2 = this.state.levels.distance[this.state.profile_4[pairs[this.state.phase%15][1]][2]];
+      let bathType2 = this.state.levels.bathType[this.state.profile_4[pairs[this.state.phase%15][1]][3]];
 
-    if(this.state.phase < 8){
       return(
         <div className="all-wrapper">
           <h1 className="script">第{this.state.phase+1}問</h1>
@@ -180,13 +132,22 @@ class Online extends React.Component {
         </div>
       )
     }
-    else{
-      let height1 = this.state.levels.height[this.state.profiles[this.state.phase*2][4]];
-      let old1 = this.state.levels.old[this.state.profiles[this.state.phase*2][5]];
-      let height2 = this.state.levels.height[this.state.profiles[this.state.phase*2+1][4]];
-      let old2 = this.state.levels.old[this.state.profiles[this.state.phase*2+1][5]];
 
-       if(this.state.phase < 16){
+    else{
+       if(this.state.phase < 30){
+        let energy1 = this.state.levels.energy[this.state.profile_6[pairs[this.state.phase%15][0]][0]];
+        let extent1 = this.state.levels.extent[this.state.profile_6[pairs[this.state.phase%15][0]][1]];
+        let distance1 = this.state.levels.distance[this.state.profile_6[pairs[this.state.phase%15][0]][2]];
+        let bathType1 = this.state.levels.bathType[this.state.profile_6[pairs[this.state.phase%15][0]][3]];
+        let height1 = this.state.levels.height[this.state.profile_6[pairs[this.state.phase%15][0]][4]];
+        let old1 = this.state.levels.old[this.state.profile_6[pairs[this.state.phase%15][0]][5]];
+        let energy2 = this.state.levels.energy[this.state.profile_6[pairs[this.state.phase%15][1]][0]];
+        let extent2 = this.state.levels.extent[this.state.profile_6[pairs[this.state.phase%15][1]][1]];
+        let distance2 = this.state.levels.distance[this.state.profile_6[pairs[this.state.phase%15][1]][2]];
+        let bathType2 = this.state.levels.bathType[this.state.profile_6[pairs[this.state.phase%15][1]][3]];
+        let height2 = this.state.levels.height[this.state.profile_6[pairs[this.state.phase%15][1]][4]];
+        let old2 = this.state.levels.old[this.state.profile_6[pairs[this.state.phase%15][1]][5]];
+
         return(
           <div className="all-wrapper">
             <h1 className="script">第{this.state.phase+1}問</h1>
@@ -198,13 +159,26 @@ class Online extends React.Component {
           </div>
         )
        }
-       else{
-        let stoveNum1 = this.state.levels.stoveNum[this.state.profiles[this.state.phase*2][6]];
-        let direction1 = this.state.levels.direction[this.state.profiles[this.state.phase*2][7]];
-        let stoveNum2 = this.state.levels.stoveNum[this.state.profiles[this.state.phase*2+1][6]];
-        let direction2 = this.state.levels.direction[this.state.profiles[this.state.phase*2+1][7]];
 
-         if(this.state.phase < 24){
+       else{
+         if(this.state.phase < 45){
+          let energy1 = this.state.levels.energy[this.state.profile_8[pairs[this.state.phase%15][0]][0]];
+          let extent1 = this.state.levels.extent[this.state.profile_8[pairs[this.state.phase%15][0]][1]];
+          let distance1 = this.state.levels.distance[this.state.profile_8[pairs[this.state.phase%15][0]][2]];
+          let bathType1 = this.state.levels.bathType[this.state.profile_8[pairs[this.state.phase%15][0]][3]];
+          let height1 = this.state.levels.height[this.state.profile_8[pairs[this.state.phase%15][0]][4]];
+          let old1 = this.state.levels.old[this.state.profile_8[pairs[this.state.phase%15][0]][5]];
+          let stoveNum1 = this.state.levels.stoveNum[this.state.profile_8[pairs[this.state.phase%15][0]][6]];
+          let direction1 = this.state.levels.direction[this.state.profile_8[pairs[this.state.phase%15][0]][7]];
+          let energy2 = this.state.levels.energy[this.state.profile_8[pairs[this.state.phase%15][1]][0]];
+          let extent2 = this.state.levels.extent[this.state.profile_8[pairs[this.state.phase%15][1]][1]];
+          let distance2 = this.state.levels.distance[this.state.profile_8[pairs[this.state.phase%15][1]][2]];
+          let bathType2 = this.state.levels.bathType[this.state.profile_8[pairs[this.state.phase%15][1]][3]];
+          let height2 = this.state.levels.height[this.state.profile_8[pairs[this.state.phase%15][1]][4]];
+          let old2 = this.state.levels.old[this.state.profile_8[pairs[this.state.phase%15][1]][5]];
+          let stoveNum2 = this.state.levels.stoveNum[this.state.profile_8[pairs[this.state.phase%15][1]][6]];
+          let direction2 = this.state.levels.direction[this.state.profile_8[pairs[this.state.phase%15][1]][7]];
+
           return (
             <div className="all-wrapper">
               <h1 className="script">第{this.state.phase+1}問</h1>
@@ -216,13 +190,30 @@ class Online extends React.Component {
             </div>
            )
          }
-         else{
-          let waterBill1 = this.state.levels.waterBill[this.state.profiles[this.state.phase*2][8]];
-          let security1 = this.state.levels.security[this.state.profiles[this.state.phase*2][9]];
-          let waterBill2 = this.state.levels.waterBill[this.state.profiles[this.state.phase*2+1][8]];
-          let security2 = this.state.levels.security[this.state.profiles[this.state.phase*2+1][9]];
 
-          if(this.state.phase < 32){
+         else{
+          if(this.state.phase < 60){
+            let energy1 = this.state.levels.energy[this.state.profile_10[pairs[this.state.phase%15][0]][0]];
+            let extent1 = this.state.levels.extent[this.state.profile_10[pairs[this.state.phase%15][0]][1]];
+            let distance1 = this.state.levels.distance[this.state.profile_10[pairs[this.state.phase%15][0]][2]];
+            let bathType1 = this.state.levels.bathType[this.state.profile_10[pairs[this.state.phase%15][0]][3]];
+            let height1 = this.state.levels.height[this.state.profile_10[pairs[this.state.phase%15][0]][4]];
+            let old1 = this.state.levels.old[this.state.profile_10[pairs[this.state.phase%15][0]][5]];
+            let stoveNum1 = this.state.levels.stoveNum[this.state.profile_10[pairs[this.state.phase%15][0]][6]];
+            let direction1 = this.state.levels.direction[this.state.profile_10[pairs[this.state.phase%15][0]][7]];
+            let waterBill1 = this.state.levels.waterBill[this.state.profile_10[pairs[this.state.phase%15][0]][8]];
+            let security1 = this.state.levels.security[this.state.profile_10[pairs[this.state.phase%15][0]][9]];
+            let energy2 = this.state.levels.energy[this.state.profile_10[pairs[this.state.phase%15][1]][0]];
+            let extent2 = this.state.levels.extent[this.state.profile_10[pairs[this.state.phase%15][1]][1]];
+            let distance2 = this.state.levels.distance[this.state.profile_10[pairs[this.state.phase%15][1]][2]];
+            let bathType2 = this.state.levels.bathType[this.state.profile_10[pairs[this.state.phase%15][1]][3]];
+            let height2 = this.state.levels.height[this.state.profile_10[pairs[this.state.phase%15][1]][4]];
+            let old2 = this.state.levels.old[this.state.profile_10[pairs[this.state.phase%15][1]][5]];
+            let stoveNum2 = this.state.levels.stoveNum[this.state.profile_10[pairs[this.state.phase%15][1]][6]];
+            let direction2 = this.state.levels.direction[this.state.profile_10[pairs[this.state.phase%15][1]][7]];
+            let waterBill2 = this.state.levels.waterBill[this.state.profile_10[pairs[this.state.phase%15][1]][8]];
+            let security2 = this.state.levels.security[this.state.profile_10[pairs[this.state.phase%15][1]][9]];
+
             return (
               <div className="all-wrapper">
               <h1 className="script">第{this.state.phase+1}問</h1>
@@ -235,12 +226,33 @@ class Online extends React.Component {
             )
           }
           else{
-            let age1 = this.state.levels.age[this.state.profiles[this.state.phase*2][10]];
-            let womenRate1 = this.state.levels.womenRate[this.state.profiles[this.state.phase*2][11]];
-            let age2 = this.state.levels.age[this.state.profiles[this.state.phase*2+1][10]];
-            let womenRate2 = this.state.levels.womenRate[this.state.profiles[this.state.phase*2+1][11]];
+            if(this.state.phase < 75){
+              let energy1 = this.state.levels.energy[this.state.profile_12[pairs[this.state.phase%15][0]][0]];
+              let extent1 = this.state.levels.extent[this.state.profile_12[pairs[this.state.phase%15][0]][1]];
+              let distance1 = this.state.levels.distance[this.state.profile_12[pairs[this.state.phase%15][0]][2]];
+              let bathType1 = this.state.levels.bathType[this.state.profile_12[pairs[this.state.phase%15][0]][3]];
+              let height1 = this.state.levels.height[this.state.profile_12[pairs[this.state.phase%15][0]][4]];
+              let old1 = this.state.levels.old[this.state.profile_12[pairs[this.state.phase%15][0]][5]];
+              let stoveNum1 = this.state.levels.stoveNum[this.state.profile_12[pairs[this.state.phase%15][0]][6]];
+              let direction1 = this.state.levels.direction[this.state.profile_12[pairs[this.state.phase%15][0]][7]];
+              let waterBill1 = this.state.levels.waterBill[this.state.profile_12[pairs[this.state.phase%15][0]][8]];
+              let security1 = this.state.levels.security[this.state.profile_12[pairs[this.state.phase%15][0]][9]];
+              let age1 = this.state.levels.age[this.state.profile_12[pairs[this.state.phase%15][0]][10]];
+              let womenRate1 = this.state.levels.womenRate[this.state.profile_12[pairs[this.state.phase%15][0]][11]];
 
-            if(this.state.phase < 40){
+              let energy2 = this.state.levels.energy[this.state.profile_12[pairs[this.state.phase%15][1]][0]];
+              let extent2 = this.state.levels.extent[this.state.profile_12[pairs[this.state.phase%15][1]][1]];
+              let distance2 = this.state.levels.distance[this.state.profile_12[pairs[this.state.phase%15][1]][2]];
+              let bathType2 = this.state.levels.bathType[this.state.profile_12[pairs[this.state.phase%15][1]][3]];
+              let height2 = this.state.levels.height[this.state.profile_12[pairs[this.state.phase%15][1]][4]];
+              let old2 = this.state.levels.old[this.state.profile_12[pairs[this.state.phase%15][1]][5]];
+              let stoveNum2 = this.state.levels.stoveNum[this.state.profile_12[pairs[this.state.phase%15][1]][6]];
+              let direction2 = this.state.levels.direction[this.state.profile_12[pairs[this.state.phase%15][1]][7]];
+              let waterBill2 = this.state.levels.waterBill[this.state.profile_12[pairs[this.state.phase%15][1]][8]];
+              let security2 = this.state.levels.security[this.state.profile_12[pairs[this.state.phase%15][1]][9]];
+              let age2 = this.state.levels.age[this.state.profile_12[pairs[this.state.phase%15][1]][10]];
+              let womenRate2 = this.state.levels.womenRate[this.state.profile_12[pairs[this.state.phase%15][1]][11]];
+              
               return (
                 <div className="all-wrapper">
                 <h1 className="script">第{this.state.phase+1}問</h1>
@@ -252,23 +264,6 @@ class Online extends React.Component {
               </div>
               )
             }
-            else{
-              let pet1 = this.state.levels.pet[this.state.profiles[this.state.phase*2][12]];
-              let smoke1 = this.state.levels.smoke[this.state.profiles[this.state.phase*2][13]];
-              let pet2 = this.state.levels.pet[this.state.profiles[this.state.phase*2+1][12]];
-              let smoke2 = this.state.levels.smoke[this.state.profiles[this.state.phase*2+1][13]];
-              
-              return (
-                <div className="all-wrapper">
-                <h1 className="script">第{this.state.phase+1}問</h1>
-                <div className="compare-wrapper">
-                  <Room14 energy={energy1} extent={extent1} distance={distance1} bathType={bathType1} height={height1} old={old1} stoveNum={stoveNum1} direction={direction1} waterBill={waterBill1} security={security1} age={age1} womenRate={womenRate1} pet={pet1} smoke={smoke1} label={"A"} click={this.addChoiceA} />
-                  <Room14 energy={energy2} extent={extent2} distance={distance2} bathType={bathType2} height={height2} old={old2} stoveNum={stoveNum2} direction={direction2} waterBill={waterBill2} security={security2} age={age2} womenRate={womenRate2} pet={pet2} smoke={smoke2} label={"B"} click={this.addChoiceB} />
-                </div>
-                <p className="third-button" onClick={this.addChoiceNone}>どちらでもない</p>
-              </div>
-               )
-            }
           }
          }  
        }
@@ -277,7 +272,7 @@ class Online extends React.Component {
 
   render(){
     console.log(this.state.results);
-    if(this.state.phase < 48){
+    if(this.state.phase < 75){
       return this.createTwoRooms();
     }
     else{
